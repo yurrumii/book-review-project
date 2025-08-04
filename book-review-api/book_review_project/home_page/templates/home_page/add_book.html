@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить книгу</title>
+</head>
+<body>
+    <h1>Добавить новую книгу</h1>
+
+    <a href="/books/">Назад к списку книг</a>
+    <br><br>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_title">Название книги:</label>
+        <input type="text" name="title" id="id_title" required>
+        <br><br>
+
+        <label for="id_author">Автор:</label>
+        <input type="text" name="author" id="id_author" required>
+        <br><br>
+
+        <label for="id_description">Описание:</label>
+        <textarea name="description" id="id_description" required></textarea>
+        <br><br>
+
+        <button type="submit">Добавить книгу</button>
+    </form>
+</body>
+</html>

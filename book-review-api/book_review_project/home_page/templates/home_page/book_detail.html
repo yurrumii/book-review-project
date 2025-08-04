@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book.title }}</title>
+</head>
+<body>
+    <a href="/books/">← Назад к списку</a>
+
+    <h1>{{ book.title }}</h1>
+
+    <h3>Информация о книге</h3>
+    <p><strong>Автор:</strong> {{ book.author }}</p>
+    <p><strong>Описание:</strong> {{ book.description }}</p>
+    {% if book.average_rating %}
+        <p><strong>Средний рейтинг:</strong> {{ book.average_rating }}/5</p>
+    {% endif %}
+
+    <hr>
+
+    <h3>Рецензии</h3>
+    {% for review in reviews %}
+        <p>
+            <strong>Автор:</strong> {{ review.user_name|default:"Аноним" }}<br>
+            <strong>Рейтинг:</strong> {{ review.rating }}/5<br>
+            {{ review.text }}<br>
+            <small>Добавлено: {{ review.created_at|date:"d.m.Y H:i" }}</small>
+        </p>
+        <hr>
+    {% empty %}
+        <p>Рецензий пока нет. Будьте первым!</p>
+    {% endfor %}
+
+    <hr>
+
+    <h3>Добавить рецензию</h3>
+    {% if user.is_authenticated and not user_reviewed and book and book.id %}
+        <form method="post" action="/books/{{ book.id }}/reviews/add/">
+            {% csrf_token %}
+            <label for="id_rating">Рейтинг:</label>
+            <input type="number" name="rating" id="id_rating" min="1" max="5" required>
+            <br><br>
+            <label for="id_text">Текст рецензии:</label>
+            <textarea name="text" id="id_text" required></textarea>
+            <br><br>
+            <button type="submit">Сохранить рецензию</button>
+        </form>
+    {% elif not user.is_authenticated %}
+        <p>Только <a href="/login/">авторизованные пользователи</a> могут оставлять рецензии.</p>
+    {% elif user_reviewed %}
+        <p>Вы уже оставили рецензию на эту книгу.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+</head>
+<body>
+    <h1>Добро пожаловать в систему рецензий книг</h1>
+
+    {% if user.is_authenticated %}
+        <p>Привет, {{ user.username }}! Вы успешно вошли в систему.</p>
+        <p><a href="/books/">Список книг</a></p>
+        <p><a href="/books/add/">Добавить книгу</a></p>
+        <p><a href="/logout/">Выйти</a></p>
+    {% else %}
+        <p>Пожалуйста, <a href="/login/">войдите в систему</a> для доступа к функцтям.</p>
+    {% endif %}
+</body>
+</html>

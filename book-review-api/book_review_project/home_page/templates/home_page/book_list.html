@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список книг</title>
+</head>
+<body>
+    <h1>Список книг</h1>
+
+    <a href="/books/add/">Добавить новую книгу</a>
+    <hr>
+
+    {% for book in books %}
+        <div>
+            <h2><a href="/books/{{ book.id }}/">{{ book.title }}</a></h2>
+            <p><strong>Автор:</strong> {{ book.author }}</p>
+            {% if book.description %}
+                <p><strong>Описание:</strong> {{ book.description }}</p>
+            {% endif %}
+            {% if book.average_rating %}
+                <p><strong>Рейтинг:</strong> {{ book.average_rating }}/5</p>
+            {% else %}
+                <p>Нет рейтинга</p>
+            {% endif %}
+            <hr>
+        </div>
+    {% empty %}
+        <p>Книг пока нет. Добавьте первую книгу!</p>
+    {% endfor %}
+</body>
+</html>
