@@ -4,7 +4,7 @@
 Добавление рецензий (рейтинг, отзыв)
 Стильный красивый сайт, оформленный в минимализме
 Установка:
-1. gh repo clone yurrumii/book-review-project
+1. 
 2. Виртуальное окружение 
 3. python -m venv venv
 source venv/bin/activate  # Linux/Mac
